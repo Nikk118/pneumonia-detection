@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Detection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #020617;
+            padding: 25px;
+            border-radius: 12px;
+            width: 360px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 100%;
+            max-height: 220px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+            background: #020617;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #22c55e;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .prob {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Pneumonia Detection</h2>
+
+    <input type="file" id="fileInput" accept="image/*" onchange="previewImage()" />
+    <img id="preview" />
+
+    <button onclick="predict()">Predict</button>
+
+    <div class="result" id="result"></div>
+    <div class="prob" id="prob"></div>
+</div>
+
+<script>
+function previewImage() {
+    const fileInput = document.getElementById("fileInput");
+    const preview = document.getElementById("preview");
+
+    if (fileInput.files.length > 0) {
+        preview.src = URL.createObjectURL(fileInput.files[0]);
+        preview.style.display = "block";
+    }
+}
+
+async function predict() {
+    const fileInput = document.getElementById("fileInput");
+    const resultDiv = document.getElementById("result");
+    const probDiv = document.getElementById("prob");
+
+    if (!fileInput.files.length) {
+        alert("Please select an X-ray image");
+        return;
+    }
+
+    resultDiv.innerText = "Analyzing...";
+    probDiv.innerText = "";
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    try {
+        const res = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        resultDiv.innerText = "Prediction: " + data.prediction;
+        probDiv.innerText = "Probability: " + data.probability;
+
+        resultDiv.style.color =
+            data.prediction === "PNEUMONIA" ? "#ef4444" : "#22c55e";
+
+    } catch (err) {
+        resultDiv.innerText = "Server error";
+        resultDiv.style.color = "#ef4444";
+    }
+}
+</script>
+
+</body>
+</html>

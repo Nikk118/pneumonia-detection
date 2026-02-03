@@ -1,0 +1,59 @@
+# ===============================
+# Python
+# ===============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+
+# ===============================
+# Virtual Environment (VERY IMPORTANT)
+# ===============================
+backend/
+venv/
+env/
+.venv/
+
+# ===============================
+# Jupyter
+# ===============================
+.ipynb_checkpoints/
+
+# ===============================
+# ML / Model files
+# ===============================
+*.h5
+*.keras
+*.pb
+variables/
+assets/
+
+# ===============================
+# Test images / datasets
+# ===============================
+testImages/
+testimages/
+infected/
+normal/
+*.jpg
+*.jpeg
+*.png
+
+# ===============================
+# OS / Editor
+# ===============================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ===============================
+# Node / frontend (if added later)
+# ===============================
+node_modules/
+
+# ===============================
+# Environment variables
+# ===============================
+.env
