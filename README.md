@@ -60,9 +60,22 @@ Loss: 0.2868
 Accuracy: 86.86%
 Recall: 96.15%
 ```
+
+## Screenshots
+
+### Upload Image
+![Upload](screenshots/upload.png)
+
+### Prediction Result
+![Result](screenshots/result.png)
+
+### Backend Running
+![Backend](screenshots/backend.png)
+
 ## Backend (Flask API)
 
 The backend is built using **Flask** and serves the trained CNN model for inference.
+
 
 
 
