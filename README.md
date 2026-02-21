@@ -5,7 +5,7 @@ Includes model training, evaluation, threshold tuning, Flask API, and frontend i
 
 > ⚠️ Educational use only. Not for medical diagnosis.
 
----
+```
 
 ## Project Structure
 
@@ -20,7 +20,7 @@ pneumonia-detection-system/
 └── .gitignore
 
 
----
+```
 
 ## Dataset
 
@@ -69,12 +69,10 @@ Recall: 96.15%
 ### Prediction Result
 ![Result](screenshots/result.png)
 
-### Backend Running
-![Backend](screenshots/backend.png)
-
 ## Backend (Flask API)
 
 The backend is built using **Flask** and serves the trained CNN model for inference.
+
 
 
 
